@@ -1,0 +1,22 @@
+<%- include('../includes/head.ejs') %>
+<body>
+  <%- include('../includes/navbar.ejs') %>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col">
+        <h1 class="title"><%= singleCerita.title %></h1>
+        <blockquote class="blockquote">
+          <p class="mb-0">Written By</p>
+          <footer class="blockquote-footer">
+            <cite title="Source Title"
+              ><%= singleCerita.userId.username %></cite
+            >
+          </footer>
+        </blockquote>
+        <p class="mt-5"><%= singleCerita.cerita %></p>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../includes/end.ejs') %>
+</body>

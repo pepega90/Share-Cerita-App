@@ -1,0 +1,69 @@
+<nav
+  class="navbar navbar-expand-lg navbar-light"
+  style="background-color: #e3f2fd;"
+>
+  <a class="navbar-brand" href="#">ShareCerita</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item <%= path === '/' ? 'active' : '' %>">
+        <a class="nav-link" href="/"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <% if(isMasuk) { %>
+      <li class="nav-item">
+        <a
+          class="nav-link <%= path === '/add-cerita' ? 'active' : '' %>"
+          href="/admin/add-cerita"
+          >Add Cerita</a
+        >
+      </li>
+
+      <li class="nav-item <%= path === '/mycerita' ? 'active' : '' %>">
+        <a href="/admin/mycerita" class="nav-link">My Cerita</a>
+      </li>
+      <% } %> <% if(!isMasuk) { %>
+      <div class="login_daftar">
+        <li class="nav-item">
+          <a
+            class="nav-link <%= path === '/login' ? 'active' : '' %>"
+            href="/login"
+            >Login</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link <%= path === '/daftar' ? 'active' : '' %>"
+            href="/daftar"
+            >Daftar</a
+          >
+        </li>
+      </div>
+      <% } else { %>
+      <li class="nav-item">
+        <form action="/logout" method="POST">
+          <button
+            type="submit"
+            class="btn logout btn-danger <%= path === '/logout' ? 'active' : '' %>"
+          >
+            Logout
+          </button>
+        </form>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,62 @@
+<%- include('../includes/head.ejs') %> <%- include('../includes/navbar.ejs') %>
+<body>
+  <div class="container">
+    <% if(pesanError) { %>
+    <div class="alert mt-4 alert-danger" role="alert">
+      <%= pesanError %>
+    </div>
+    <% } %>
+    <div class="row mt-5">
+      <div class="col">
+        <form action="/daftar" method="POST" novalidate>
+          <div class="form-group">
+            <label for="Username">Username</label>
+            <input
+              type="text"
+              name="username"
+              class="form-control <%= errMsg.find( e => e.param === 'username') ? 'border-danger' : '' %>"
+              id="username"
+              aria-describedby="UsernameHelp"
+              value="<%= oldInput.username %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              class="form-control <%= errMsg.find( e => e.param === 'email') ? 'border-danger' : '' %>"
+              id="email"
+              aria-describedby="emailHelp"
+              value="<%= oldInput.email %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control <%= errMsg.find( e => e.param === 'password') ? 'border-danger' : '' %>"
+              aria-describedat="passwordHelp"
+              value="<%= oldInput.password %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              class="form-control <%= errMsg.find( e => e.param === 'confirmPassword') ? 'border-danger' : '' %>"
+              aria-describedat="passwordHelp"
+              value="<%= oldInput.confirmPassword %>"
+            />
+          </div>
+          <button type="submit" class="btn btn-info">
+            Daftar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <%- include('../includes/end.ejs') %>
+</body>

@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+<%- include('../includes/navbar.ejs') %>
+<link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body>
+    <div class="container">
+        <div class="row mt-5">
+          <% if(cerita.length > 0) { %>
+            <% cerita.forEach(cerpen => { %>    
+              <div class="col-md-4">
+                  <div class="card mt-3">
+                      <img src="/<%= cerpen.image %>" class="card-img-top">
+                      <div class="card-body">
+                        <h5 class="card-title"><%= cerpen.title %></h5>
+                        <blockquote class="blockquote">
+                            <p class="mb-0">Written By</p>
+                            <footer class="blockquote-footer"><cite title="Source Title"><%= cerpen.userId.username %></cite></footer>
+                          </blockquote>
+                        <p class="card-text"><%= cerpen.cerita %></p>
+                        <a href="/detail/<%= cerpen._id %>" class="btn btn-primary">Read More</a>
+                        <a href="/admin/edit-cerita/<%= cerpen._id %>?edit=true" class="btn btn-success">Edit</a>
+                      </div>
+                      <form action="/admin/delete-cerita/<%= cerpen._id %>" method="POST">
+                        <button type="submit" class="btn btn-danger hapus">Delete</button>
+                      </form>
+                    </div>
+              </div>
+          <%  }); %>
+          <% } else { %>
+            <h1>No Cerita Found</h1>
+            <% } %>
+        </div>
+    </div>
+    <%- include('../includes/end.ejs') %>
+    

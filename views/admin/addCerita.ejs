@@ -1,0 +1,53 @@
+<%- include('../includes/head.ejs') %> <%- include('../includes/navbar.ejs') %>
+<body>
+  <div class="container">
+    <% if(pesanError) { %>
+    <div class="alert mt-4 alert-danger" role="alert">
+      <%= pesanError %>
+    </div>
+    <% } %>
+    <div class="row mt-5">
+      <div class="col">
+        <form
+          action="/admin/<% if (editMode) { %>edit-cerita<% } else { %>add-cerita<% } %>"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              class="form-control <%= errMsg.find( e => e.param === 'title') ? 'border-danger' : '' %>"
+              id="title"
+              aria-describedby="emailHelp"
+              value="<% if (editMode || hasError) { %> <%=cerpen.title%><%}%>"
+            />
+          </div>
+          <div class="form-group_image mt-4 mb-4">
+            <label for="image"></label>
+            <input type="file" name="image" id="image" />
+          </div>
+          <div class="form-group">
+            <label for="cerita">Cerita Kamu</label>
+            <textarea
+              name="cerita"
+              class="form-control <%= errMsg.find( e => e.param === 'cerita') ? 'border-danger' : '' %>"
+              id="cerita"
+              rows="3"
+            >
+<% if(editMode || hasError) { %><%=cerpen.cerita%><% } %></textarea
+            >
+          </div>
+          <% if (editMode) { %>
+          <input type="hidden" value="<%= cerpen._id %>" name="ceritaId" />
+          <% } %>
+          <button type="submit" class="btn btn-primary">
+            <% if (editMode) { %>Edit Cerita<% } else { %>Tambah Cerita<% } %>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <%- include('../includes/end.ejs') %>
+</body>

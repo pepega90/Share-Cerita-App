@@ -1,0 +1,33 @@
+.hapus {
+  width: 100%;
+}
+
+.form-group_image {
+  border: 1px solid #dddddd;
+  padding: 0.4rem 0.3rem;
+  border-radius: 5px;
+}
+
+.login_daftar {
+  display: flex;
+  position: absolute;
+  right: 0;
+  margin-right: 1.5rem;
+}
+
+.logout {
+  position: absolute;
+  right: 0;
+  margin-right: 1.5rem;
+}
+
+@media (max-width: 720px) {
+  .login_daftar {
+    display: inline-block;
+    position: relative;
+  }
+
+  .logout {
+    position: relative;
+  }
+}
