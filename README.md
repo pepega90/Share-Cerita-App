@@ -4,7 +4,7 @@ A website, where you can share stories with others
 
 ## Getting Started
 
-Don't forget to use ``` npm install ``` for install all dependencies for the first time
+Don't forget to use ``` npm install ``` for install all dependencies for the first time and
 
 ```
 npm start
