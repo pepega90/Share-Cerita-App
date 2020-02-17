@@ -6,9 +6,6 @@ A website, where you can share stories with others
 
 Don't forget to use ``` npm install ``` for install all dependencies for the first time
 
-
-### Installing
-
 ```
 npm start
 ```
