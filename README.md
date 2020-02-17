@@ -16,15 +16,13 @@ to start the server
 
 ## Styling and Technology 
 
-* Styling
+* Styling :
 I use bootstrap
 
-* Backend
+* Backend :
 Node.js with express framework
 
 ### Feature
 
-1. Create story
-2. Update Story
-3. and delete
-4. Upload photo with multer 
+1. Basically, I implemented a CRUD where you can create updates and delete your stories
+2. Upload photo for your story with multer 
