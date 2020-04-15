@@ -21,6 +21,24 @@
   margin-right: 1.5rem;
 }
 
+.jumbotron {
+  height: 60vh;
+  background: url('/img/bgJumbo.jpg');
+  background-attachment: fixed;
+}
+
+.title-jumbotron,
+.content-jumbotron {
+  color: #ffffff;
+}
+
+.komen-form {
+  border: 1px solid #ccc;
+  padding: 10px 2rem;
+  margin-top: 2rem;
+}
+
+
 @media (max-width: 720px) {
   .login_daftar {
     display: inline-block;

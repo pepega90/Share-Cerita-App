@@ -1,62 +1,68 @@
-const {validationResult} = require('express-validator/check');
+const { validationResult } = require( 'express-validator/check' );
+const client = require( 'twilio' )(
+  'AC2116128d83f292c7291cd5c8ba8bf742',
+  '5d32d67d514b09a3f1ac07c8893e6367'
+);
 
-const Cerita = require('../model/cerita');
+require( 'dotenv' ).config();
 
-exports.getAddCerita = (req, res, next) => {
-  res.render('admin/addCerita', {
+const Cerita = require( '../model/cerita' );
+
+exports.getAddCerita = ( req, res, next ) => {
+  res.render( 'admin/addCerita', {
     editMode: false,
     path: '/add-cerita',
     pesanError: null,
     hasError: '',
     errMsg: []
-  });
+  } );
 };
 
-exports.getMyCerita = (req, res, next) => {
-  Cerita.find({userId: req.user._id})
-    .populate('userId')
-    .then(data => {
-      res.render('admin/myCerita', {
+exports.getMyCerita = ( req, res, next ) => {
+  Cerita.find( { userId: req.user._id } )
+    .populate( 'userId' )
+    .then( data => {
+      res.render( 'admin/myCerita', {
         cerita: data,
         path: '/mycerita'
-      });
-    })
-    .catch(err => {
-      const error = new Error(err);
+      } );
+    } )
+    .catch( err => {
+      const error = new Error( err );
       error.httpStatusCode = 500;
-      return next(error);
-    });
+      return next( error );
+    } );
 };
 
-exports.getEditCerita = (req, res, next) => {
+exports.getEditCerita = ( req, res, next ) => {
   const editing = req.query.edit;
-  if (!editing) {
-    res.redirect('/');
+  if ( !editing ) {
+    res.redirect( '/' );
   }
   const ceritaId = req.params.ceritaId;
-  Cerita.findById(ceritaId)
-    .then(cerpen => {
-      if (!cerpen) {
-        return res.redirect('/');
+  Cerita.findById( ceritaId )
+    .then( cerpen => {
+      if ( !cerpen ) {
+        return res.redirect( '/' );
       }
-      res.render('admin/addCerita', {
+      res.render( 'admin/addCerita', {
         cerpen: cerpen,
         editMode: editing,
         path: '/edit-cerita',
         hasError: '',
         pesanError: null,
         errMsg: []
-      });
-    })
-    .catch(err => console.log(err));
+      } );
+    } )
+    .catch( err => console.log( err ) );
 };
 
-exports.postAddCerita = (req, res, next) => {
+exports.postAddCerita = ( req, res, next ) => {
   const title = req.body.title;
   const image = req.file;
   const cerita = req.body.cerita;
-  if (!image) {
-    return res.status(422).render('admin/addCerita', {
+  if ( !image ) {
+    return res.status( 422 ).render( 'admin/addCerita', {
       editMode: false,
       cerpen: {
         title: title,
@@ -66,11 +72,11 @@ exports.postAddCerita = (req, res, next) => {
       path: '/add-cerita',
       pesanError: 'Harus bertipe gambar',
       errMsg: []
-    });
+    } );
   }
-  const errorMessage = validationResult(req);
-  if (!errorMessage.isEmpty()) {
-    return res.status(422).render('admin/addCerita', {
+  const errorMessage = validationResult( req );
+  if ( !errorMessage.isEmpty() ) {
+    return res.status( 422 ).render( 'admin/addCerita', {
       editMode: false,
       cerpen: {
         title: title,
@@ -78,39 +84,48 @@ exports.postAddCerita = (req, res, next) => {
       },
       hasError: true,
       path: '/add-cerita',
-      pesanError: errorMessage.array()[0].msg,
+      pesanError: errorMessage.array()[ 0 ].msg,
       errMsg: errorMessage.array()
-    });
+    } );
   }
 
   const gambar = image.path;
 
-  const cerpen = new Cerita({
+  const cerpen = new Cerita( {
     title: title,
     image: gambar,
     cerita: cerita,
     userId: req.user._id
-  });
+  } );
+
+  client.messages
+    .create( {
+      from: 'whatsapp:+14155238886',
+      to: 'whatsapp:' + process.env.MY_PHONE,
+      body: req.body.title
+    } )
+    .then( message => console.log( message.sid ) );
+
   cerpen
     .save()
-    .then(result => {
-      res.redirect('/');
-    })
-    .catch(err => {
-      const error = new Error(err);
+    .then( result => {
+      res.redirect( '/' );
+    } )
+    .catch( err => {
+      const error = new Error( err );
       error.httpStatusCode = 500;
-      return next(error);
-    });
+      return next( error );
+    } );
 };
 
-exports.postEditCerita = (req, res, next) => {
+exports.postEditCerita = ( req, res, next ) => {
   const ceritaId = req.body.ceritaId;
   const updatedTitle = req.body.title;
   const image = req.file;
   const updatedCerita = req.body.cerita;
-  const errorMessage = validationResult(req);
-  if (!errorMessage.isEmpty()) {
-    return res.status(422).render('admin/addCerita', {
+  const errorMessage = validationResult( req );
+  if ( !errorMessage.isEmpty() ) {
+    return res.status( 422 ).render( 'admin/addCerita', {
       editMode: true,
       hasError: false,
       path: '/edit-cerita',
@@ -120,44 +135,44 @@ exports.postEditCerita = (req, res, next) => {
         cerita: updatedCerita,
         _id: ceritaId
       },
-      pesanError: errorMessage.array()[0].msg,
+      pesanError: errorMessage.array()[ 0 ].msg,
       errMsg: errorMessage.array()
-    });
+    } );
   }
-  Cerita.findById(ceritaId)
-    .then(cerita => {
-      if (cerita.userId.toString() !== req.user._id.toString()) {
-        return res.redirect('/');
+  Cerita.findById( ceritaId )
+    .then( cerita => {
+      if ( cerita.userId.toString() !== req.user._id.toString() ) {
+        return res.redirect( '/' );
       }
       cerita.title = updatedTitle;
-      if (image) {
+      if ( image ) {
         cerita.image = image.path;
       }
       cerita.cerita = updatedCerita;
 
-      return cerita.save().then(result => {
-        console.log('UPDATED PRODUCT!');
-        res.redirect('/admin/mycerita');
-      });
-    })
-    .catch(err => {
-      const error = new Error(err);
+      return cerita.save().then( result => {
+        console.log( 'UPDATED PRODUCT!' );
+        res.redirect( '/admin/mycerita' );
+      } );
+    } )
+    .catch( err => {
+      const error = new Error( err );
       error.httpStatusCode = 500;
-      return next(error);
-    });
+      return next( error );
+    } );
 };
 
-exports.postDeleteCerita = (req, res, next) => {
+exports.postDeleteCerita = ( req, res, next ) => {
   const ceritaId = req.params.ceritaId;
 
-  Cerita.deleteOne({_id: ceritaId, userId: req.user._id})
-    .then(result => {
-      console.log('DESTROY CERITA');
-      res.redirect('/admin/mycerita');
-    })
-    .catch(err => {
-      const error = new Error(err);
+  Cerita.deleteOne( { _id: ceritaId, userId: req.user._id } )
+    .then( result => {
+      console.log( 'DESTROY CERITA' );
+      res.redirect( '/admin/mycerita' );
+    } )
+    .catch( err => {
+      const error = new Error( err );
       error.httpStatusCode = 500;
-      return next(error);
-    });
+      return next( error );
+    } );
 };
