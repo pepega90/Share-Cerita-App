@@ -1,10 +1,4 @@
 const { validationResult } = require( 'express-validator/check' );
-const client = require( 'twilio' )(
-  'AC2116128d83f292c7291cd5c8ba8bf742',
-  '5d32d67d514b09a3f1ac07c8893e6367'
-);
-
-require( 'dotenv' ).config();
 
 const Cerita = require( '../model/cerita' );
 
