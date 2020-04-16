@@ -23,3 +23,5 @@ Node.js with express framework
 
 1. Basically, I implemented a CRUD where you can create updates and delete your stories
 2. Upload photo for your story with multer 
+3. Comment
+4. Login and Register User
