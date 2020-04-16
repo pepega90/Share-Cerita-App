@@ -98,14 +98,6 @@ exports.postAddCerita = ( req, res, next ) => {
     userId: req.user._id
   } );
 
-  client.messages
-    .create( {
-      from: 'whatsapp:+14155238886',
-      to: 'whatsapp:' + process.env.MY_PHONE,
-      body: req.body.title
-    } )
-    .then( message => console.log( message.sid ) );
-
   cerpen
     .save()
     .then( result => {

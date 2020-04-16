@@ -24,7 +24,7 @@
                           <p class="mb-0">Written By</p>
                           <footer class="blockquote-footer"><cite title="Source Title"><%= cerpen.userId.username %></cite></footer>
                         </blockquote>
-                        <p class="card-text"><%= cerpen.cerita %></p>
+                        
                         <a href="/detail/<%= cerpen._id %>" class="btn btn-primary">Read More</a>
                       </div>
                     </div>
@@ -35,5 +35,6 @@
             <% } %>
         </div>
     </div>
+
     <%- include('../includes/end.ejs') %>
     
