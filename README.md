@@ -16,8 +16,7 @@ to start the server
 * Styling :
 I use bootstrap
 
-* Backend :
-Node.js with express framework
+* Node.js with express framework
 
 ### Feature
 
