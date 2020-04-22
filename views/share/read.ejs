@@ -58,13 +58,16 @@
 
 <div class="container komen-form">
     <form method="POST" action="/detail/<%= singleCerita._id %>">
+    
     <div class="form-group">
       <h3>Masukkan Komentar</h3>
        <input type="text" class="form-control" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    
     </div>
     <div class="form-group">
        <textarea placeholder="Masukkan Komentar..." class="form-control" name="komentar" aria-label="With textarea"></textarea>
     </div>
+    
     <button type="submit" class="btn btn-primary">Comment</button>
   </form>
 </div>

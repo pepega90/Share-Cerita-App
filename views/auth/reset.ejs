@@ -8,7 +8,8 @@
     <% } %>
     <div class="row mt-5">
       <div class="col">
-        <form action="/login" method="POST" novalidate>
+        <form action="/reset" method="POST" novalidate>
+
           <div class="form-group">
             <label for="email">Email</label>
             <input
@@ -20,23 +21,12 @@
               value="<%= oldInput.email %>"
             />
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              class="form-control <%= errMsg.find( e => e.param === 'password') ? 'border-danger' : '' %>"
-              aria-describedat="passwordHelp"
-              value="<%= oldInput.password %>"
-            />
-          </div>
+
           <button type="submit" class="btn btn-info">
-            Login
+            Reset Password
           </button>
-        </form>
-        <div>
-            <a href="/reset">Lupa Password ?</a>
-        </div>
+
+        </form> 
       </div>
     </div>
   </div>

@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %> <%- include('../includes/navbar.ejs') %>
+<body>
+  <div class="container">
+
+    <% if(errorMessage) { %>
+    <div class="alert mt-4 alert-danger" role="alert">
+      <%= errorMessage %>
+    </div>
+    <% } %>
+
+    <div class="row mt-5">
+      <div class="col">
+
+        <form action="/new-password" method="POST" novalidate>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control
+              aria-describedat="passwordHelp"
+            />
+          </div>
+          <button type="submit" class="btn btn-info">
+            Update Password
+          </button>
+          <input type="hidden" name="userId" value="<%= userId %>"/>
+          <input type="hidden" name="passwordToken" value="<%= passwordToken %>"/>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <%- include('../includes/end.ejs') %>
+</body>
