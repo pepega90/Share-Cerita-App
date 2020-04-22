@@ -22,7 +22,7 @@ I use bootstrap
 
 1. Basically, I implemented a CRUD where you can create updates and delete your stories
 2. Upload photo for your story with multer 
-3. Comment
+3. Comment section
 4. Login and Register User
 5. Reset password feature
 
