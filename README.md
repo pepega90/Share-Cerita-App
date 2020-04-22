@@ -24,6 +24,7 @@ I use bootstrap
 2. Upload photo for your story with multer 
 3. Comment
 4. Login and Register User
+5. Reset password feature
 
 ## License
 
