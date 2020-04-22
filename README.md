@@ -16,8 +16,7 @@ to start the server
 * Styling :
 I use bootstrap
 
-* Backend :
-Node.js with express framework
+* Node.js with express framework
 
 ### Feature
 
@@ -25,3 +24,7 @@ Node.js with express framework
 2. Upload photo for your story with multer 
 3. Comment
 4. Login and Register User
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
